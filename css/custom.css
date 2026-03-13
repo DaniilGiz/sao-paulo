@@ -904,3 +904,46 @@ body.menu-open {
 .menu-login__item-logout {
   display: none;
 }
+
+/* .glb-share-bar_button:hover {
+  background-color: var(--btn-share-bg--hover-clr);
+} */
+
+.glb-share-bar_button[type="facebook"]:hover {
+  background-color: #0766ff !important;
+  cursor: pointer;
+}
+
+.glb-share-bar_button[type="whatsapp"]:hover {
+  background-color: #25d366 !important;
+  cursor: pointer;
+}
+
+.glb-share-bar_button[type="system"]:hover {
+  background-color: #000 !important;
+  cursor: pointer;
+}
+
+.glb-share-bar_button[type="facebook"]:hover .glb-share-bar_button-img {
+  background-image: url(../images/fb_inv.svg);
+}
+
+.glb-share-bar_button[type="whatsapp"]:hover .glb-share-bar_button-img {
+  background-image: url(../images/whatsapp_inv.svg);
+}
+
+.glb-share-bar_button[type="system"]:hover .glb-share-bar_button-img {
+  background-image: url(../images/system_inv.svg);
+}
+
+amp-social-share[type="facebook"] .glb-share-bar_button-img {
+  background-image: url(../images/fb.svg);
+}
+
+amp-social-share[type="whatsapp"] .glb-share-bar_button-img {
+  background-image: url(../images/whatsapp.svg);
+}
+
+amp-social-share[type="system"] .glb-share-bar_button-img {
+  background-image: url(../images/system.svg);
+}

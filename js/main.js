@@ -1,5 +1,11 @@
 const leadForm = document.getElementById("lead-form");
 
+function syncLogoTargets(root = document) {
+  root.querySelectorAll(".logo-area .logo").forEach((link) => {
+    link.setAttribute("href", "#");
+  });
+}
+
 function scrollToLeadForm(event) {
   if (!leadForm) {
     return;
@@ -9,27 +15,21 @@ function scrollToLeadForm(event) {
   leadForm.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-function bindScrollTargets() {
-  const clickableItems = document.querySelectorAll("a[href], button, .glb-share-bar_button");
+function bindButtonTargets() {
+  const buttons = document.querySelectorAll("button, .glb-share-bar_button");
 
-  clickableItems.forEach((item) => {
-    if (item.closest("#lead-form")) {
-      return;
-    }
-
-    if (item.matches('button[type="submit"]')) {
-      return;
-    }
-
+  buttons.forEach((button) => {
     if (
-      item.closest(".menu-area") ||
-      item.closest("#menu-container") ||
-      item.closest("#menu-curtain")
+      button.closest("#lead-form") ||
+      button.matches('button[type="submit"]') ||
+      button.closest(".menu-area") ||
+      button.closest("#menu-container") ||
+      button.closest("#menu-curtain")
     ) {
       return;
     }
 
-    item.addEventListener("click", scrollToLeadForm);
+    button.addEventListener("click", scrollToLeadForm);
   });
 }
 
@@ -54,6 +54,7 @@ function initFloatingHeader() {
     element.removeAttribute("id");
   });
 
+  syncLogoTargets(floatingBar);
   floatingShell.appendChild(floatingBar);
   headerRoot.appendChild(floatingShell);
 
@@ -165,6 +166,14 @@ function initHeaderMenu() {
       submenu.classList.add("is-open");
     });
   });
+
+  menuContainer
+    .querySelectorAll('.menu-item:not(.is-father) > a.menu-item-link[href="#lead-form"]')
+    .forEach((link) => {
+      link.addEventListener("click", () => {
+        closeMenu();
+      });
+    });
 
   menuContainer.querySelectorAll(".menu-btn-back").forEach((button) => {
     button.addEventListener("click", () => {
@@ -292,7 +301,8 @@ function initLeadForm() {
   });
 }
 
-bindScrollTargets();
+syncLogoTargets();
+bindButtonTargets();
 initFloatingHeader();
 initHeaderMenu();
 initLeadForm();
